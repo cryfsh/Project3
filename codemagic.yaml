@@ -1,15 +1,15 @@
 workflows:
   android-build:
-    name: Build Android
-    environment:
-      groups:
-        - android
+    name: Build dengan Setup Lengkap
     scripts:
-      - name: Setup Gradle
+      - name: Install Gradle
         script: |
-          chmod +x ./gradlew
-      - name: Build Debug
+          export GRADLE_URL=https://services.gradle.org/distributions/gradle-8.0-bin.zip
+          wget $GRADLE_URL -O gradle.zip
+          unzip gradle.zip
+          export PATH=$PATH:$(pwd)/gradle-8.0/bin
+      - name: Build APK
         script: |
-          ./gradlew assembleDebug
+          gradle assembleDebug
     artifacts:
-      - app/build/outputs/**/*.apk
+      - app/build/outputs/apk/debug/*.apk
