@@ -1,18 +1,58 @@
-name: Android Build
+workflows:
+  android-workflow:
+    name: Android Build
+    environment:
+      groups:
+        - keystore
+      vars:
+        PACKAGE_NAME: "com.dhyaksaarkananta.planebattlegame"
+    scripts:
+      - name: Set up Android SDK
+        script: |
+          echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$CM_BUILD_DIR/local.properties"
+          yes | $HOME/programs/android-sdk-macosx/cmdline-tools/latest/bin/sdkmanager --licenses
+      - name: Build debug APK
+        script: |
+          ./gradlew assembleDebug
+      - name: Build release AAB
+        script: |
+          ./gradlew bundleRelease
+    artifacts:
+      - app/build/outputs/apk/**/*.apk
+      - app/build/outputs/bundle/**/*.aab
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        in_app_update_priority: 3
 
-on: [push]
-
-jobs:
+# Android build configuration
+android:
   build:
-    runs-on: ubuntu-latest
+    - name: Build Debug
+      build_flavor: Debug
+      build_type: apk
+    - name: Build Release
+      build_flavor: Release
+      build_type: aab
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11'
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+# Environment variables (replace with your values)
+environment:
+  vars:
+    CM_KEYSTORE_PATH: $CM_BUILD_DIR/keystore.jks
+    CM_KEY_ALIAS: $CM_KEY_ALIAS
+    CM_KEY_PASSWORD: $CM_KEY_PASSWORD
+    CM_STORE_PASSWORD: $CM_STORE_PASSWORD
+
+# Triggering builds
+triggering:
+  events:
+    - push
+    - pull_request
+  branch_patterns:
+    - pattern: main
+      include: true
+      build_on: push
