@@ -1,0 +1,40 @@
+DhyaksaPlaneBattle/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/
+│   │   │   │       └── namagithubanda/  # Ganti dengan username GitHub Anda
+│   │   │   │           └── planebattle/
+│   │   │   │               ├── AktivitasUtama.java
+│   │   │   │               ├── karakter/
+│   │   │   │               │   ├── DhyaksaArkananta.java
+│   │   │   │               │   └── KemampuanKhusus.java
+│   │   │   │               ├── musuh/
+│   │   │   │               │   ├── Boss.java
+│   │   │   │               │   └── MusuhBiasa.java
+│   │   │   │               └── util/
+│   │   │   │                   ├── PengelolaSkor.java
+│   │   │   │                   └── PengelolaSuara.java
+│   │   │   ├── res/
+│   │   │   │   ├── drawable/
+│   │   │   │   │   ├── dhyaksa.png      # Sprite karakter utama
+│   │   │   │   │   ├── ledakan.png      # Efek visual
+│   │   │   │   │   └── latar_belakang.png
+│   │   │   │   ├── raw/
+│   │   │   │   │   ├── tembak.wav      # Efek suara
+│   │   │   │   │   └── musik_latar.wav
+│   │   │   │   └── values/
+│   │   │   │       ├── strings.xml
+│   │   │   │       ├── colors.xml
+│   │   │   │       └── styles.xml
+│   │   │   └── AndroidManifest.xml
+│   │   └── test/                      # Untuk testing
+├── gradle/
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── .gitignore
+├── build.gradle
+├── settings.gradle
+└── README.md
