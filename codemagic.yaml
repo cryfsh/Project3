@@ -1,5 +1,5 @@
 # Konfigurasi otomatisasi build untuk Codemagic
-nama_workflow: Build Game Dhyaksa
+nama_workflow: Build App
 
 variabel_lingkungan:
   # Ganti dengan nama package Anda
