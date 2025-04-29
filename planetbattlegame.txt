@@ -1,0 +1,30 @@
+PlaneBattleGame/
+├── .github/
+│   └── workflows/
+│       └── android-build.yml
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/
+│   │   │   │       └── yourgithubusername/
+│   │   │   │           └── planebattlegame/
+│   │   │   │               ├── GameActivity.java
+│   │   │   │               ├── GameEngine.java
+│   │   │   │               ├── (File-file Java lainnya...)
+│   │   │   ├── res/
+│   │   │   │   ├── drawable/
+│   │   │   │   ├── raw/
+│   │   │   │   └── values/
+│   │   │   └── AndroidManifest.xml
+│   │   └── test/
+├── gradle/
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── .gitignore
+├── build.gradle
+├── gradlew
+├── gradlew.bat
+├── README.md
+└── settings.gradle
