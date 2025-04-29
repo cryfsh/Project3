@@ -1,15 +1,15 @@
 workflows:
-  build-game:
-    name: Build Dasar
+  android-build:
+    name: Build Android
+    environment:
+      groups:
+        - android
     scripts:
+      - name: Setup Gradle
+        script: |
+          chmod +x ./gradlew
       - name: Build Debug
         script: |
           ./gradlew assembleDebug
-      - name: Build Release 
-        script: |
-          ./gradlew assembleRelease
     artifacts:
-      - app/build/outputs/apk/**/*.apk
-    publishing:
-      email:
-        recipients: ["email@anda.com"] # Ganti dengan email Anda
+      - app/build/outputs/**/*.apk
