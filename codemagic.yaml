@@ -1,7 +1,9 @@
+# Konfigurasi otomatisasi build untuk Codemagic
 nama_workflow: Build Game Dhyaksa
 
 variabel_lingkungan:
-  NAMA_PACKAGE: "com.project3.planebattle"
+  # Ganti dengan nama package Anda
+  NAMA_PACKAGE: "com.cryfsh.planebattle"
   VERSI_KODE: 1
   VERSI_NAMA: "1.0.0"
 
@@ -57,6 +59,6 @@ pengaturan_khusus:
 notifikasi:
   email:
     penerima:
-      - erikcrayfish@gmail.com
+      - erikcrayfish@gmail.com  # Ganti dengan email Anda
   slack:
     webhook_url: $SLACK_WEBHOOK  # Set di environment variable
