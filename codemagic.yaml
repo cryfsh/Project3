@@ -1,64 +1,15 @@
-# Konfigurasi otomatisasi build untuk Codemagic
-nama_workflow: Build App
-
-variabel_lingkungan:
-  # Ganti dengan nama package Anda
-  NAMA_PACKAGE: "com.cryfsh.planebattle"
-  VERSI_KODE: 1
-  VERSI_NAMA: "1.0.0"
-
-pemicu:
-  # Jalankan build saat:
-  - push ke branch utama
-  - ada pull request
-
-perangkat:
-  # Gunakan image Android terbaru
-  image: android
-
-langkah_build:
-  - nama: "Persiapan SDK Android"
-    skrip: |
-      echo "Menyiapkan environment Android..."
-      sdkmanager "platform-tools" "platforms;android-34"
-      sdkmanager --licenses
-
-  - nama: "Build APK Debug"
-    skrip: |
-      echo "Membuild versi debug..."
-      ./gradlew assembleDebug
-    artefak:
-      - app/build/outputs/apk/debug/*.apk
-
-  - nama: "Build AAB Release"
-    skrip: |
-      echo "Membuild versi release..."
-      ./gradlew bundleRelease
-    artefak:
-      - app/build/outputs/bundle/release/*.aab
-
-  - nama: "Upload ke GitHub Releases"
-    skrip: |
-      echo "Mengupload hasil build..."
-      # Hanya jalankan saat push ke branch utama
-      if [ "$CM_BUILD_TRIGGER" = "push" ] && [ "$CM_BRANCH" = "main" ]; then
-        gh release create v$VERSI_NAMA \
-          app/build/outputs/apk/debug/app-debug.apk \
-          app/build/outputs/bundle/release/app-release.aab \
-          --title "Versi $VERSI_NAMA" \
-          --notes "Game Dhyaksa Arkananta versi terbaru"
-      fi
-
-pengaturan_khusus:
-  android:
-    gradle:
-      versi: 8.0
-    alat_build:
-      versi: 34.0.0
-
-notifikasi:
-  email:
-    penerima:
-      - erikcrayfish@gmail.com  # Ganti dengan email Anda
-  slack:
-    webhook_url: $SLACK_WEBHOOK  # Set di environment variable
+workflows:
+  build-game:
+    name: Build Dasar
+    scripts:
+      - name: Build Debug
+        script: |
+          ./gradlew assembleDebug
+      - name: Build Release 
+        script: |
+          ./gradlew assembleRelease
+    artifacts:
+      - app/build/outputs/apk/**/*.apk
+    publishing:
+      email:
+        recipients: ["email@anda.com"] # Ganti dengan email Anda
